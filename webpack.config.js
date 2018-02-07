@@ -1,5 +1,9 @@
 var path = require('path');
 
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+let extractLESS = new ExtractTextPlugin('stylesheets/[name].less');
+
 module.exports = {
     // entry:path.resolve(__dirname,'src/page/index/index.js'),
     entry:[
@@ -31,11 +35,20 @@ module.exports = {
 		        }
 	    	},
 	    	{
+	            test: /\.less$/,
+	            use: [
+	                'style-loader',
+	                'css-loader',
+	                'less-loader'
+	            ],
+	        },
+	    	{
 		        test: /\.css$/,
 		        loaders: [
 		           'style-loader',
 		           'css-loader',
-		           'postcss-loader'
+		           'postcss-loader',
+		           'less-loader',
 		        ]
 		    },
 		    {
@@ -44,16 +57,12 @@ module.exports = {
 	        },
 	    ]
 	},
-	// devServer: {
- //        inline: false,
- //        contentBase: "./build",
- //    },
 	devServer: {
         compress: true, // 启用gzip压缩
         contentBase: path.join(__dirname, 'build'),
         // port: 3000, // 运行端口3000
         inline: false,
-        // hot: true,
-        // historyApiFallback: true,
+        hot: true,
+        historyApiFallback: true,
     },
 };

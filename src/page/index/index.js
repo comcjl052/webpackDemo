@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ListItem from '../../lib/component/listItem';
 
-import './index.css';
+import './index.less';
 
 class PageCon extends React.Component{
 	render(){
